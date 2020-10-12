@@ -47,8 +47,7 @@ Important notes:
 ## Usage
 
 ```twig
-   {% set build_type = is_modern_browser() ? 'modern' : 'legacy' %}
-    <script src="/build/{{ build_type }}.js"
+<script src="/build/{{ is_modern_browser() ? 'modern' : 'legacy' }}.js" type="application/javascript"></script>
 ```
 
 ```php
