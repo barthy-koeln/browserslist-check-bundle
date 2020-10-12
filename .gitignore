@@ -1,0 +1,31 @@
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+/.idea/
+.DS_Store
+/coverage/
+/test/public
+
+test-coverage.json
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+node_modules
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs.cache
+/.phpcs-cache
+/.php_cs.dist
+###< friendsofphp/php-cs-fixer ###

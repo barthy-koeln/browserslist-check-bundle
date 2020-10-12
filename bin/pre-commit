@@ -1,0 +1,19 @@
+#!/bin/bash
+# shellcheck disable=SC2046
+
+echo -e "[EXECUTING PRE COMMIT HOOK]\n"
+
+echo -e "Removing VarDump uses\n"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' '/VarDumper::dump/d' ./src/**/*.php
+  sed -i '' '/use Symfony\\Component\\VarDumper\\VarDumper;/d' ./src/**/*.php
+else
+  sed -i '/VarDumper::dump/d' ./src/**/*.php
+  sed -i '/use Symfony\\Component\\VarDumper\\VarDumper;/d' ./src/**/*.php
+fi
+
+echo -e "Fixing PHP Code Style\n"
+vendor/bin/php-cs-fixer --quiet fix src
+
+echo -e "Staging Changes\n"
+git update-index --again

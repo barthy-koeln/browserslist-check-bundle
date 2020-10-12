@@ -1,0 +1,55 @@
+{
+  "name": "barthy-koeln/browserslist-check-bundle",
+  "type": "symfony-bundle",
+  "version": "0.1.0",
+  "description": "Detects browser versions, matches .browserslistrc files and serves encore builds accordingly.",
+  "homepage": "https://github.com/barthy-koeln/browserslist-check-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Barthy",
+      "homepage": "https://github.com/barthy-koeln",
+      "email": "post@barthy.koeln"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "donatj/phpuseragentparser": "^1.1",
+    "symfony/config": "^4.4|^5.1",
+    "symfony/dependency-injection": "^4.4|^5.1",
+    "symfony/http-kernel": "^4.4|^5.1",
+    "symfony/yaml": "^4.4|^5.1",
+    "twig/extensions": "^1.5"
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "BarthyKoeln\\BrowserslistCheckBundle\\": "src/"
+    }
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "brainmaestro/composer-git-hooks": "^2.8",
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpmd/phpmd": "^2.7",
+    "squizlabs/php_codesniffer": "^3.5",
+    "symfony/console": "^4.4|^5.1",
+    "symfony/flex": "^1.0"
+  },
+  "extra": {
+    "hooks" : {
+      "pre-commit": [
+        "bin/pre-commit"
+      ]
+    }
+  }
+}
