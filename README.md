@@ -58,7 +58,7 @@ use BarthyKoeln\BrowserslistCheckBundle\DependencyInjection\BrowserslistCheck;
 public function someControllerAction(BrowserslistCheck $browserslistCheck)
 {
     $isModern = $browserslistCheck->isModern();
-    $isModern = $browserslistCheck->isModern('ie11', 12.1); // pls no
+    $isModern = $browserslistCheck->isModern('Explorer', 9); // pls no
 }
 ```
 
