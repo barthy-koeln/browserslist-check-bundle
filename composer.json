@@ -1,7 +1,7 @@
 {
   "name": "barthy-koeln/browserslist-check-bundle",
   "type": "symfony-bundle",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Detects browser versions, matches .browserslistrc files and serves encore builds accordingly.",
   "homepage": "https://github.com/barthy-koeln/browserslist-check-bundle",
   "license": "MIT",
