@@ -1,15 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2046
 
 echo -e "[EXECUTING PRE COMMIT HOOK]\n"
 
-echo -e "Removing VarDump uses\n"
+VAR_DUMP_USAGE='/VarDumper::dump/d'
+VAR_DUMP_IMPORT='/use Symfony\\Component\\VarDumper\\VarDumper;/d'
+
+echo -e "Removing VarDumper uses and imports\n"
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' '/VarDumper::dump/d' ./src/**/*.php
-  sed -i '' '/use Symfony\\Component\\VarDumper\\VarDumper;/d' ./src/**/*.php
+  sed -i '' "$VAR_DUMP_USAGE" $(find src -name '*.php')
+  sed -i '' "$VAR_DUMP_IMPORT" $(find src -name '*.php')
 else
-  sed -i '/VarDumper::dump/d' ./src/**/*.php
-  sed -i '/use Symfony\\Component\\VarDumper\\VarDumper;/d' ./src/**/*.php
+  sed -i "$VAR_DUMP_USAGE" $(find src -name '*.php')
+  sed -i "$VAR_DUMP_IMPORT" $(find src -name '*.php')
 fi
 
 echo -e "Fixing PHP Code Style\n"

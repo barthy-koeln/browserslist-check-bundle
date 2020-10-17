@@ -2,13 +2,12 @@
 
 namespace BarthyKoeln\BrowserslistCheckBundle\Twig;
 
-use BarthyKoeln\BrowserslistCheckBundle\DependencyInjection\BrowserslistCheck;
+use BarthyKoeln\BrowserslistCheckBundle\Service\BrowserslistCheck;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class MultiEncoresExtension extends AbstractExtension
+class BrowserslistCheckExtension extends AbstractExtension
 {
-
     private BrowserslistCheck $browsersListConfig;
 
     public function __construct(BrowserslistCheck $browsersListConfig)
@@ -23,7 +22,7 @@ class MultiEncoresExtension extends AbstractExtension
         ];
     }
 
-    public function isModernBrowser()
+    public function isModernBrowser(): bool
     {
         return $this->browsersListConfig->isModern();
     }

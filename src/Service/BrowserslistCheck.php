@@ -1,6 +1,6 @@
 <?php
 
-namespace BarthyKoeln\BrowserslistCheckBundle\DependencyInjection;
+namespace BarthyKoeln\BrowserslistCheckBundle\Service;
 
 use donatj\UserAgent\UserAgentParser;
 
