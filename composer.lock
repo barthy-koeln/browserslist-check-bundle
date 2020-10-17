@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74f7cb921ba8e3d8a30d8a8ec1e7c790",
+    "content-hash": "099d2a292164754c025ca5e70a1fa66b",
     "packages": [
         {
             "name": "donatj/phpuseragentparser",
