@@ -6,9 +6,10 @@ use donatj\UserAgent\UserAgentParser;
 
 class BrowserslistCheck
 {
+
     private array $browsers;
     private ?string $browser = null;
-    private ?float $version  = null;
+    private ?float $version = null;
 
     public function __construct(array $browsers)
     {
@@ -24,6 +25,10 @@ class BrowserslistCheck
 
             $this->browser = $userAgent->browser();
             $this->version = floatval($userAgent->browserVersion());
+
+            if (null === $this->browser || null === $this->version) {
+                return false;
+            }
         }
 
         return $this->matchVersion($browser ?? $this->browser, $version ?? $this->version);
