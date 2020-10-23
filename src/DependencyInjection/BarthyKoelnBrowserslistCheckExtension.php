@@ -27,7 +27,7 @@ class BarthyKoelnBrowserslistCheckExtension extends Extension
             return;
         }
 
-        $parser = new BrowsersListParser();
+        $parser = new BrowserslistParser();
         $parsed = $parser->parse(file_get_contents($filePath));
 
         $container->getDefinition(BrowserslistCheck::class)->setArgument('$browsers', $parsed);
