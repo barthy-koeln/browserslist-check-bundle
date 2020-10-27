@@ -3,16 +3,24 @@
 namespace BarthyKoeln\BrowserslistCheckBundle\Service;
 
 use donatj\UserAgent\UserAgentParser;
+use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class BrowserslistCheck
 {
 
     private array $browsers;
+
     private ?string $browser = null;
+
     private ?float $version = null;
 
-    public function __construct(array $browsers)
+    private ?Request $request;
+
+    public function __construct(array $browsers, RequestStack $requestStack)
     {
+        $this->request  = $requestStack->getMasterRequest();
         $this->browsers = $browsers;
     }
 
@@ -21,7 +29,11 @@ class BrowserslistCheck
         if (null === $browser && null === $this->browser) {
             $parser = new UserAgentParser();
 
-            $userAgent = $parser->parse();
+            try {
+                $userAgent = $parser->parse($this->request->headers->get('User-Agent'));
+            } catch (InvalidArgumentException $exception) {
+                return false;
+            }
 
             $this->browser = $userAgent->browser();
             $this->version = floatval($userAgent->browserVersion());
