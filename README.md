@@ -40,8 +40,8 @@ not dead
 
 Important notes:
 * The `[modern]` config must be at the top
-* The constraint within that build must only map Browsernames with
-  minimal versions using the `>=` operator. Browser with versions higher
+* The constraints within that build must only map browser names with
+  minimum versions using the `>=` operator. Browsers with versions higher
   or equal are "modern".
 
 ## Usage
