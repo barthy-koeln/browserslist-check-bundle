@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2046
 
-echo -e "[EXECUTING PRE COMMIT HOOK]\n"
+DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+# shellcheck source=./io.sh
+source "$DIR/io.sh"
 
-VAR_DUMP_USAGE='/VarDumper::dump/d'
-VAR_DUMP_IMPORT='/use Symfony\\Component\\VarDumper\\VarDumper;/d'
+colored_output "$GREEN" "\n[EXECUTING PRE COMMIT HOOK]"
 
-echo -e "Removing VarDumper uses and imports\n"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' "$VAR_DUMP_USAGE" $(find src -name '*.php')
-  sed -i '' "$VAR_DUMP_IMPORT" $(find src -name '*.php')
-else
-  sed -i "$VAR_DUMP_USAGE" $(find src -name '*.php')
-  sed -i "$VAR_DUMP_IMPORT" $(find src -name '*.php')
-fi
+DIRECTORIES="src"
 
-echo -e "Fixing PHP Code Style\n"
-vendor/bin/php-cs-fixer --quiet fix src
+info "Removing VarDump uses"
+# shellcheck disable=SC2086
+find $DIRECTORIES -type f -name '*.php' -exec sed -i '/VarDumper/d' {} \;
 
-echo -e "Staging Changes\n"
+info "Fixing PHP Code Style"
+# shellcheck disable=SC2086
+vendor/bin/php-cs-fixer --quiet fix $DIRECTORIES --config=.php_cs
+
+success "All good, staging additional changes.\n"
 git update-index --again

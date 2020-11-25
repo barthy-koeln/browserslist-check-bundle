@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class BrowserslistCheck
 {
-
     private array $browsers;
 
     private ?string $browser = null;
