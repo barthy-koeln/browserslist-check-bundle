@@ -26,19 +26,21 @@ Your `.browserslistrc` file should look like this:
 
 ```
 [modern]
-Chrome >= 84
-Firefox >= 80
-Safari >= 13.1
-Opera >= 70
-Edge >= 85
-iOS >= 12.4
-Samsung >= 12
-ChromeAndroid >= 85
+Chrome >= 92
+Firefox >= 90
+Safari >= 14
+Opera >= 77
+Edge >= 92
+iOS >= 14
+Samsung >= 13
+ChromeAndroid >= 92
 
 [legacy]
 >1%
 last 2 versions
 not dead
+ie 10
+ie 11
 ```
 
 Important notes:
@@ -116,7 +118,16 @@ Encore
   .setPublicPath(`/build/${buildType}`)
   .setManifestKeyPrefix(`build/${buildType}`)
 
- // [...]
+  // [...]
+
+  // Not required, but ie10 & ie11 have some trouble with data-uris
+  .configureImageRule({
+    type: isModern ? 'asset' : 'asset/resource',
+    maxSize: isModern ? 8 * 1024 : undefined,
+    filename: 'images/[name].[contenthash][ext]'
+  })
+
+  // [...]
 ```
 
 **file:** `package.json`
