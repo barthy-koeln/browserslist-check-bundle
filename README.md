@@ -110,6 +110,7 @@ webpack_encore:
 ```javascript
 const Encore = require('@symfony/webpack-encore')
 const buildType = process.env.BROWSERSLIST_ENV
+const isModern = buildType === 'modern'
 
 Encore
   // [...]
