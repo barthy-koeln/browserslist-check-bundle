@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 
 DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-# shellcheck source=./io.sh
-source "$DIR/io.sh"
+source "$DIR/../vendor/bin/echolorized"
 
 colored_output "$GREEN" "\n[EXECUTING PRE COMMIT HOOK]"
 
 DIRECTORIES="src"
 
-info "Removing VarDump uses"
+e_info "Removing VarDump uses"
 # shellcheck disable=SC2086
 find $DIRECTORIES -type f -name '*.php' -exec sed -i '/VarDumper/d' {} \;
 
-info "Fixing PHP Code Style"
+e_info "Fixing PHP Code Style"
 # shellcheck disable=SC2086
 vendor/bin/php-cs-fixer --quiet fix $DIRECTORIES --config=.php_cs
 
-success "All good, staging additional changes.\n"
+e_success "All good, staging additional changes.\n"
 git update-index --again

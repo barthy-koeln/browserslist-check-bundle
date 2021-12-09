@@ -19,7 +19,7 @@ class BrowserslistCheck
 
     public function __construct(array $browsers, RequestStack $requestStack)
     {
-        $this->request  = $requestStack->getMasterRequest();
+        $this->request  = $requestStack->getMainRequest();
         $this->browsers = $browsers;
     }
 
@@ -37,7 +37,7 @@ class BrowserslistCheck
             $this->browser = $userAgent->browser();
             $this->version = floatval($userAgent->browserVersion());
 
-            if (null === $this->browser || null === $this->version) {
+            if (null === $this->browser) {
                 return false;
             }
         }

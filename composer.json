@@ -14,10 +14,10 @@
   "require": {
     "php": "^7.4",
     "donatj/phpuseragentparser": "^1.1",
-    "symfony/config": "^4.4 || ^5.0",
-    "symfony/dependency-injection": "^4.4 || ^5.0",
-    "symfony/http-kernel": "^4.4 || ^5.0",
-    "symfony/yaml": "^4.4 || ^5.0",
+    "symfony/config": "^4.4 || ^5.4",
+    "symfony/dependency-injection": "^4.4 || ^5.4",
+    "symfony/http-kernel": "^4.4 || ^5.4",
+    "symfony/yaml": "^4.4 || ^5.4",
     "twig/twig": "^2.11 || ^3.0"
   },
   "config": {
@@ -37,6 +37,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
+    "barthy-koeln/bash-echolorized": "^1.0",
     "brainmaestro/composer-git-hooks": "^2.8",
     "friendsofphp/php-cs-fixer": "^2.16",
     "phpmd/phpmd": "^2.7",
