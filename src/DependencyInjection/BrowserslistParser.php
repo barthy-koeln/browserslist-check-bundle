@@ -9,7 +9,6 @@ class BrowserslistParser
         $lines   = explode(PHP_EOL, $fileContents);
         $configs = [];
 
-        $lines = array_map(fn ($line) => str_replace(PHP_EOL, '', $line), $lines);
         $lines = array_filter($lines);
 
         foreach ($lines as $line) {

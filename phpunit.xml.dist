@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="./tests/bootstrap.php"
+         convertWarningsToExceptions="false"
+         convertNoticesToExceptions="false"
+         convertErrorsToExceptions="false"
+         printerClass="BarthyKoeln\BeautifySpecify\ResultPrinter"
+>
+
+    <coverage>
+        <include>
+            <directory>src</directory>
+        </include>
+        <exclude>
+            <file>src/BarthyKoelnBrowserslistCheckBundle.php</file>
+            <file>src/DependencyInjection/BarthyKoelnBrowserslistCheckExtension.php</file>
+            <file>src/Twig/BrowserslistCheckExtension.php</file>
+        </exclude>
+    </coverage>
+
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="memory_limit" value="-1"/>
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="true"/>
+        <env name="APP_SECRET" value="IqNcU6W9l8jqONsL"/>
+        <server name="KERNEL_CLASS" value="Tests\AppKernel"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+        <server name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
+</phpunit>

@@ -1,0 +1,11 @@
+parameters:
+  locale: 'en'
+
+framework:
+  secret: '%env(APP_SECRET)%'
+  php_errors:
+    log: true
+  test: true
+  session:
+    storage_id: session.storage.mock_file
+
