@@ -2,24 +2,37 @@
 
 namespace BarthyKoeln\BrowserslistCheckBundle\Service;
 
+use donatj\UserAgent\Browsers;
 use donatj\UserAgent\UserAgentParser;
 use InvalidArgumentException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class BrowserslistCheck
 {
+    /**
+     * Bots and name mismatch between Broswerslist and User-Agent
+     */
+    const SPECIAL_BROWSERS_MAP = [
+        Browsers::ANDROID_BROWSER    => 'Android',
+        Browsers::BLACKBERRY_BROWSER => 'BlackBerry',
+        Browsers::GOOGLEBOT          => 'Chrome',
+        Browsers::GOOGLEBOT_IMAGE    => 'Chrome',
+        Browsers::GOOGLEBOT_VIDEO    => 'Chrome',
+        Browsers::BINGBOT            => 'Edge',
+    ];
     private array $browsers;
-
     private ?string $browser = null;
-
     private ?float $version = null;
-
-    private ?Request $request;
+    private ?string $userAgentHeader = null;
 
     public function __construct(array $browsers, RequestStack $requestStack)
     {
-        $this->request  = $requestStack->getMainRequest();
+        $mainRequest = $requestStack->getMainRequest();
+
+        if ($mainRequest) {
+            $this->userAgentHeader = $mainRequest->headers->get('User-Agent');
+        }
+
         $this->browsers = $browsers;
     }
 
@@ -29,7 +42,7 @@ class BrowserslistCheck
             $parser = new UserAgentParser();
 
             try {
-                $userAgent = $parser->parse($this->request->headers->get('User-Agent'));
+                $userAgent = $parser->parse($this->userAgentHeader);
             } catch (InvalidArgumentException $exception) {
                 return false;
             }
@@ -42,7 +55,12 @@ class BrowserslistCheck
             }
         }
 
-        return $this->matchVersion($browser ?? $this->browser, $version ?? $this->version);
+        $browserToCheck = $browser ?? $this->browser;
+        if (array_key_exists($browserToCheck, self::SPECIAL_BROWSERS_MAP)) {
+            $browserToCheck = self::SPECIAL_BROWSERS_MAP[$browserToCheck];
+        }
+
+        return $this->matchVersion($browserToCheck, $version ?? $this->version);
     }
 
     private function matchVersion(string $browser, float $version): bool

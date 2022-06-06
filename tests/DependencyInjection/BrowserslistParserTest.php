@@ -16,8 +16,8 @@ class BrowserslistParserTest extends TestCase
 
     public function setUp(): void
     {
-        $modernOnly   = __DIR__.'/../.browserslistrc-modernOnly';
-        $regular      = __DIR__.'/../.browserslistrc';
+        $modernOnly = __DIR__.'/../.browserslistrc-modernOnly';
+        $regular = __DIR__.'/../.browserslistrc';
         $this->parser = new BrowserslistParser();
 
         $this->modernOnly = file_get_contents($modernOnly);
@@ -32,7 +32,7 @@ class BrowserslistParserTest extends TestCase
             BrowserslistParser::class,
             function () {
                 $this->it(
-                    'gets an array of Browsers',
+                    'gets an array of Browsers.',
                     function () {
                         $result = $this->parser->parse($this->modernOnly);
 
@@ -41,7 +41,7 @@ class BrowserslistParserTest extends TestCase
                 );
 
                 $this->it(
-                    'does not parse the environment names',
+                    'does not parse the environment names.',
                     function () {
                         $result = $this->parser->parse($this->modernOnly);
 
@@ -52,7 +52,7 @@ class BrowserslistParserTest extends TestCase
                 );
 
                 $this->it(
-                    'parses all lines to floats',
+                    'parses all lines to floats.',
                     function () {
                         $result = $this->parser->parse($this->modernOnly);
 
@@ -63,7 +63,7 @@ class BrowserslistParserTest extends TestCase
                 );
 
                 $this->it(
-                    'does not parse legacy versions',
+                    'does not parse legacy versions.',
                     function () {
                         $result = $this->parser->parse($this->regular);
 

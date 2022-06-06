@@ -3,4 +3,4 @@
 DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 
 
-"$DIR/../vendor/bin/phpunit" ./tests --coverage-html "$DIR/../coverage"
+XDEBUG_MODE=coverage "$DIR/../vendor/bin/phpunit" ./tests --coverage-html "$DIR/../coverage"

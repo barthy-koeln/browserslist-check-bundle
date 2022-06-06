@@ -7,6 +7,7 @@ use BarthyKoeln\BrowserslistCheckBundle\Service\BrowserslistCheck;
 use ReflectionClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class BrowserslistCheckTest extends KernelTestCase
 {
@@ -32,10 +33,30 @@ class BrowserslistCheckTest extends KernelTestCase
             BrowserslistCheck::class,
             function () {
                 $this->it(
+                    'gets the user agent string from a request stack.',
+                    function () {
+                        $stack = new RequestStack();
+                        $main  = new Request();
+
+                        $main->headers->set('User-Agent', 'this-is-a-test');
+
+                        $stack->push($main);
+
+                        $service = new BrowserslistCheck([], $stack);
+
+                        $reflection     = new ReflectionClass($service);
+                        $headerProperty = $reflection->getProperty('userAgentHeader');
+                        $headerProperty->setAccessible(true);
+
+                        $this->assertEquals('this-is-a-test', $headerProperty->getValue($service));
+                    }
+                );
+
+                $this->it(
                     'has a list of browsers.',
                     function () {
                         $reflection = new ReflectionClass($this->service);
-                        $property = $reflection->getProperty('browsers');
+                        $property   = $reflection->getProperty('browsers');
 
                         $property->setAccessible(true);
                         $browsers = $property->getValue($this->service);
@@ -45,11 +66,11 @@ class BrowserslistCheckTest extends KernelTestCase
                 );
 
                 $this->it(
-                    'does not parse anything when it is not called',
+                    'does not parse anything when it is not called.',
                     function () {
                         $reflection = new ReflectionClass($this->service);
-                        $browser = $reflection->getProperty('browser');
-                        $version = $reflection->getProperty('version');
+                        $browser    = $reflection->getProperty('browser');
+                        $version    = $reflection->getProperty('version');
 
                         $browser->setAccessible(true);
                         $version->setAccessible(true);
@@ -62,10 +83,10 @@ class BrowserslistCheckTest extends KernelTestCase
                 );
 
                 $this->it(
-                    'correctly matches versions',
+                    'correctly matches versions.',
                     function () {
                         $reflection = new ReflectionClass($this->service);
-                        $browsers = $reflection->getProperty('browsers');
+                        $browsers   = $reflection->getProperty('browsers');
 
                         $method = $reflection->getMethod('matchVersion');
 
@@ -91,77 +112,69 @@ class BrowserslistCheckTest extends KernelTestCase
                 );
 
                 $this->it(
-                    'correctly parses the user agent',
+                    'correctly parses the user agent.',
                     function () {
-                        $reflection = new ReflectionClass($this->service);
-                        $requestProperty = $reflection->getProperty('request');
-                        $browsers = $reflection->getProperty('browsers');
-                        $browser = $reflection->getProperty('browser');
-                        $version = $reflection->getProperty('version');
+                        $reflection     = new ReflectionClass($this->service);
+                        $headerProperty = $reflection->getProperty('userAgentHeader');
+                        $browsers       = $reflection->getProperty('browsers');
+                        $browser        = $reflection->getProperty('browser');
+                        $version        = $reflection->getProperty('version');
 
                         $browsers->setAccessible(true);
-                        $requestProperty->setAccessible(true);
+                        $headerProperty->setAccessible(true);
                         $browser->setAccessible(true);
                         $version->setAccessible(true);
 
-                        $request = new Request();
-
-                        $request->headers->set(
-                            'User-Agent',
-                            '',
-                        );
-
                         $browsers->setValue($this->service, ['Chrome' => 45.0]);
-                        $requestProperty->setValue($this->service, $request);
+                        $headerProperty->setValue(
+                            $this->service,
+                            ''
+                        );
 
                         $this->assertFalse($this->service->isModern());
-
-                        $request->headers->set(
-                            'User-Agent',
-                            'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 6P Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36',
-                            true
-                        );
 
                         $browsers->setValue($this->service, ['Chrome' => 45.0]);
                         $browser->setValue($this->service, null);
                         $version->setValue($this->service, null);
-                        $requestProperty->setValue($this->service, $request);
+                        $headerProperty->setValue(
+                            $this->service,
+                            'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 6P Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.83 Mobile Safari/537.36'
+                        );
 
                         $this->assertTrue($this->service->isModern());
                     }
                 );
 
                 $this->it(
-                    'graciously handles parsing errors',
+                    'graciously handles parsing errors.',
                     function () {
-                        $reflection = new ReflectionClass($this->service);
-                        $requestProperty = $reflection->getProperty('request');
-                        $browsers = $reflection->getProperty('browsers');
-                        $browser = $reflection->getProperty('browser');
-                        $version = $reflection->getProperty('version');
+                        $reflection     = new ReflectionClass($this->service);
+                        $headerProperty = $reflection->getProperty('userAgentHeader');
+                        $browsers       = $reflection->getProperty('browsers');
+                        $browser        = $reflection->getProperty('browser');
+                        $version        = $reflection->getProperty('version');
 
                         $browsers->setAccessible(true);
                         $browser->setAccessible(true);
                         $version->setAccessible(true);
-                        $requestProperty->setAccessible(true);
-                        $request = new Request();
+                        $headerProperty->setAccessible(true);
 
                         $browsers->setValue($this->service, ['Chrome' => 45.0]);
                         $browser->setValue($this->service, null);
                         $version->setValue($this->service, null);
-                        $requestProperty->setValue($this->service, $request);
+                        $headerProperty->setValue($this->service, null);
 
                         $this->assertFalse($this->service->isModern());
                     }
                 );
 
                 $this->it(
-                    'correctly checks if the browser is modern',
+                    'correctly checks if the browser is modern.',
                     function () {
                         $reflection = new ReflectionClass($this->service);
-                        $browsers = $reflection->getProperty('browsers');
-                        $browser = $reflection->getProperty('browser');
-                        $version = $reflection->getProperty('version');
+                        $browsers   = $reflection->getProperty('browsers');
+                        $browser    = $reflection->getProperty('browser');
+                        $version    = $reflection->getProperty('version');
 
                         $browsers->setAccessible(true);
                         $browser->setAccessible(true);
@@ -176,6 +189,30 @@ class BrowserslistCheckTest extends KernelTestCase
                         $version->setValue($this->service, 98.0);
 
                         $this->assertTrue($this->service->isModern());
+                    }
+                );
+
+                $this->it(
+                    'recognizes some crawlers and serves them modern code.',
+                    function () {
+                        $reflection = new ReflectionClass($this->service);
+                        $browsers   = $reflection->getProperty('browsers');
+                        $browser    = $reflection->getProperty('browser');
+                        $version    = $reflection->getProperty('version');
+
+                        $browsers->setAccessible(true);
+                        $browser->setAccessible(true);
+                        $version->setAccessible(true);
+
+                        $browsers->setValue($this->service, ['Chrome' => 98.0, 'Edge' => 95.0]);
+
+                        $this->assertTrue($this->service->isModern('Googlebot', 98.0));
+                        $this->assertFalse($this->service->isModern('Bingbot', 94.0));
+
+                        $browser->setValue($this->service, 'Googlebot-Video');
+                        $version->setValue($this->service, 23.0);
+
+                        $this->assertFalse($this->service->isModern());
                     }
                 );
             }

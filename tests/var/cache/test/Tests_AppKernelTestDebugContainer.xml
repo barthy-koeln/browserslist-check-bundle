@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.project_dir">/var/www/browserslist-check-bundle/tests</parameter>
+    <parameter key="kernel.project_dir">/home/barthy/projects/browserslist-check-bundle/tests</parameter>
     <parameter key="kernel.environment">test</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">/var/www/browserslist-check-bundle/tests/var/cache/test</parameter>
-    <parameter key="kernel.cache_dir">/var/www/browserslist-check-bundle/tests/var/cache/test</parameter>
-    <parameter key="kernel.logs_dir">/var/www/browserslist-check-bundle/tests/var/log</parameter>
+    <parameter key="kernel.build_dir">/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test</parameter>
+    <parameter key="kernel.cache_dir">/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test</parameter>
+    <parameter key="kernel.logs_dir">/home/barthy/projects/browserslist-check-bundle/tests/var/log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="BarthyKoelnBrowserslistCheckBundle">BarthyKoeln\BrowserslistCheckBundle\BarthyKoelnBrowserslistCheckBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">/var/www/browserslist-check-bundle/vendor/symfony/framework-bundle</parameter>
+        <parameter key="path">/home/barthy/projects/browserslist-check-bundle/vendor/symfony/framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="BarthyKoelnBrowserslistCheckBundle" type="collection">
-        <parameter key="path">/var/www/browserslist-check-bundle/src</parameter>
+        <parameter key="path">/home/barthy/projects/browserslist-check-bundle/src</parameter>
         <parameter key="namespace">BarthyKoeln\BrowserslistCheckBundle</parameter>
       </parameter>
     </parameter>
@@ -49,18 +49,18 @@
     <parameter key="kernel.error_controller">error_controller</parameter>
     <parameter key="debug.file_link_format">null</parameter>
     <parameter key="test.client.parameters" type="collection"/>
-    <parameter key="cache.prefix.seed">_/var/www/browserslist-check-bundle/tests.Tests_AppKernelTestDebugContainer</parameter>
+    <parameter key="cache.prefix.seed">_/home/barthy/projects/browserslist-check-bundle/tests.Tests_AppKernelTestDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
       <parameter key="cache_limiter" type="string">0</parameter>
       <parameter key="cookie_httponly">true</parameter>
       <parameter key="gc_probability">1</parameter>
     </parameter>
-    <parameter key="session.save_path">/var/www/browserslist-check-bundle/tests/var/cache/test/sessions</parameter>
+    <parameter key="session.save_path">/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/sessions</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">/var/www/browserslist-check-bundle/tests/var/cache/test/Tests_AppKernelTestDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/Tests_AppKernelTestDebugContainer.xml</parameter>
     <parameter key="console.command.ids" type="collection"/>
   </parameters>
   <services>
@@ -139,7 +139,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/http_cache</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -149,7 +149,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/Tests_AppKernelTestDebugContainerDeprecations.log</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/Tests_AppKernelTestDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer" public="true">
       <tag name="container.private" package="symfony/framework-bundle" version="5.2"/>
@@ -268,7 +268,7 @@
       </argument>
       <argument>UTF-8</argument>
       <argument type="service" id="debug.file_link_formatter" on-invalid="null"/>
-      <argument>/var/www/browserslist-check-bundle/tests</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests</argument>
       <argument type="service">
         <service>
           <argument type="service" id="request_stack"/>
@@ -301,7 +301,7 @@
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
       <argument type="service" id="filesystem"/>
-      <argument>/var/www/browserslist-check-bundle/tests</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests</argument>
       <call method="setName">
         <argument>assets:install</argument>
       </call>
@@ -454,7 +454,7 @@
     <service id="console.command.event_dispatcher_debug" class="Symfony\Bundle\FrameworkBundle\Command\EventDispatcherDebugCommand">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.Xobvezw"/>
+      <argument type="service" id=".service_locator.Uba_K9d"/>
       <call method="setName">
         <argument>debug:event-dispatcher</argument>
       </call>
@@ -547,9 +547,9 @@
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>+UeX9qmzNL</argument>
+      <argument>zjwbag8JMv</argument>
       <argument>0</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/app</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -561,50 +561,50 @@
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>IOdWve3SOw</argument>
+      <argument>DjXbg59v3D</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>u-eKoRIHy2</argument>
+      <argument>2xFBDdc0Xh</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>2f1ycpisvo</argument>
+      <argument>F2lW37Ygbp</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>dz4p4aH4V5</argument>
+      <argument>ECxJM4rxqS</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.property_info" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
       <tag name="kernel.reset" method="reset"/>
-      <argument>wcIpSBKLmr</argument>
+      <argument>6ASEFGgPKf</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -614,7 +614,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/system</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -644,7 +644,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/pools/app</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -984,7 +984,7 @@
       <argument>false</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -1030,7 +1030,7 @@
       <deprecated package="symfony/framework-bundle" version="5.1">The "%service_id%" service is deprecated, use "$session-&gt;getAttributeBag()" instead.</deprecated>
     </service>
     <service id="session.storage.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service" id="session.storage.metadata_bag"/>
       <deprecated package="symfony/framework-bundle" version="5.3">The "%service_id%" service is deprecated, use "session.storage.factory.mock_file" instead.</deprecated>
@@ -1038,7 +1038,7 @@
     <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler">
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler">
-          <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
+          <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/sessions</argument>
         </service>
       </argument>
     </service>
@@ -1270,13 +1270,13 @@
     <service id="annotations.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="annotations.reader"/>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/annotations.php</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/annotations.php</argument>
       <argument>#^Symfony\\(?:Component\\HttpKernel\\|Bundle\\FrameworkBundle\\Controller\\(?!.*Controller$))#</argument>
       <argument>true</argument>
     </service>
     <service id="annotations.cache_adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
       <tag name="container.hot_path"/>
-      <argument>/var/www/browserslist-check-bundle/tests/var/cache/test/annotations.php</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/var/cache/test/annotations.php</argument>
       <argument type="service" id="cache.annotations"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -1287,7 +1287,7 @@
     </service>
     <service id="secrets.vault" class="Symfony\Bundle\FrameworkBundle\Secrets\SodiumVault">
       <tag name="container.env_var_loader"/>
-      <argument>/var/www/browserslist-check-bundle/tests/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/config/secrets/%env(default:kernel.environment:APP_RUNTIME_ENV)%</argument>
       <argument type="service" id="secrets.decryption_key" on-invalid="ignore"/>
     </service>
     <service id="secrets.decryption_key" class="Symfony\Component\String\LazyString">
@@ -1296,7 +1296,7 @@
       <factory class="Symfony\Component\String\LazyString" method="fromCallable"/>
     </service>
     <service id="secrets.local_vault" class="Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault">
-      <argument>/var/www/browserslist-check-bundle/tests/.env.test.local</argument>
+      <argument>/home/barthy/projects/browserslist-check-bundle/tests/.env.test.local</argument>
     </service>
     <service id="BarthyKoeln\BrowserslistCheckBundle\Twig\BrowserslistCheckExtension" class="BarthyKoeln\BrowserslistCheckBundle\Twig\BrowserslistCheckExtension" public="true" autowire="true">
       <tag name="twig.extension"/>
@@ -1389,7 +1389,7 @@
         <argument key="reverse_container" type="service_closure" id="reverse_container" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
-    <service id=".service_locator.Xobvezw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Uba_K9d" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="event_dispatcher" type="service_closure" id="debug.event_dispatcher"/>

@@ -8,10 +8,10 @@
 
 /.idea/
 .DS_Store
-/coverage/
-/test/public
 
 test-coverage.json
+/tests/public
+/tests/var
 
 ###> liip/imagine-bundle ###
 /public/media/cache/

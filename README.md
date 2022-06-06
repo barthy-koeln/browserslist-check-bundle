@@ -4,7 +4,7 @@ This bundle parses `.browserslistrc` files for a config called `modern`.
 It then provides a php service and a twig method to compare the
 user-agent string against this config.
 
-It uses a great, light and fast [user agent parsing library](https://github.com/donatj/PhpUserAgent) 
+It uses a great, light and fast [user agent parsing library](https://github.com/donatj/PhpUserAgent)
 by [@donatj](https://github.com/donatj).
 
 The goal is to determine whether the browser requesting a response is
@@ -26,28 +26,39 @@ Your `.browserslistrc` file should look like this:
 
 ```
 [modern]
-Chrome >= 92
-Firefox >= 90
-Safari >= 14
-Opera >= 77
-Edge >= 92
-iOS >= 14
-Samsung >= 13
-ChromeAndroid >= 92
+Chrome >= 97
+Edge >= 97
+Firefox >= 91
+Safari >= 14.1
+Opera >= 82
+iOS >= 14.5
+Samsung >= 15
+ChromeAndroid >= 100
+FirefoxAndroid >= 98
+Android >= 99
 
 [legacy]
->1%
-last 2 versions
-not dead
-ie 10
+defaults
 ie 11
+safari >= 13
+iOS >= 13
 ```
 
 Important notes:
+
 * The `[modern]` config must be at the top
 * The constraints within that build must only map browser names with
   minimum versions using the `>=` operator. Browsers with versions higher
   or equal are "modern".
+
+## Caching The Browser Configuration
+
+Your `.browserslistrc` file will be parsed and inlined as a PHP array when Symfony builds its cache.
+
+## Crawlers & Bots
+
+This bundle recognizes a few evergreen crawlers capable of handling JavaScript and handles them as their browser
+counterpart (e.g. Chrome for Googlebot and Edge for Bingbot).
 
 ## Simple Usage
 
@@ -93,7 +104,7 @@ webpack_encore:
   builds:
     modern: '%kernel.project_dir%/public/build/modern/'
     legacy: '%kernel.project_dir%/public/build/legacy/'
-  
+
   # enable this in config/packages/prod
   #cache: false
 ```
@@ -102,7 +113,7 @@ webpack_encore:
 
 ```yaml
 webpack_encore:
-    cache: true
+  cache: true
 ```
 
 **file:** `webpack.config.js`
@@ -128,14 +139,14 @@ Encore
     filename: 'images/[name].[contenthash][ext]'
   })
 
-  // [...]
+// [...]
 ```
 
 **file:** `package.json`
 
 ```json
 {
- /* [...] */
+  /* [...] */
   "scripts": {
     "dev": "BROWSERSLIST_ENV=modern encore dev",
     "watch": "BROWSERSLIST_ENV=modern encore dev --watch",
@@ -143,7 +154,7 @@ Encore
     "build_legacy": "BROWSERSLIST_ENV=legacy encore production",
     "build": "yarn build_modern && yarn build_legacy"
   }
- /* [...] */
+  /* [...] */
 }
 ```
 
